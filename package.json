@@ -1,0 +1,25 @@
+{
+  "name": "ddp-server-event",
+  "version": "1.0.0",
+  "description": "The implementation of DDP server based on EventEmitter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexbeletsky/ddp-server-event.git"
+  },
+  "keywords": [
+    "ddp",
+    "server",
+    "events",
+    "meteor"
+  ],
+  "author": "alexander.beletsky@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexbeletsky/ddp-server-event/issues"
+  },
+  "homepage": "https://github.com/alexbeletsky/ddp-server-event"
+}
