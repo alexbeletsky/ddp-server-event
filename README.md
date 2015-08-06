@@ -45,37 +45,38 @@ server.listen(3000);
 
 Each event handler binded to `ddp` instance as `this`, such methods are available.
 
-##### `ddp.sendResult();`
+##### `ddp.sendResult(id, result);`
 
 Sends the result back to subscriber.
 
-##### `ddp.sendError();`
+##### `ddp.sendError(id, error);`
 
 Sends the error back to subscriber.
 
-##### `ddp.sendAdded();`
+##### `ddp.sendAdded(id, collection, fields);`
 
 Sends `added` back to subscriber.
 
-##### `ddp.sendChanged();`
+##### `ddp.sendChanged(id, collection, fields, cleared);`
 
 Sends `changed` back to subscriber.
 
-##### `ddp.sendDeleted();`
+##### `ddp.sendDeleted(id, collection, fields, cleared);`
 
 Sends `deleted` back to subscriber.
 
-##### `ddp.sendEvent();`
-
-Sends *generic* back to subscriber.
-
-##### `ddp.sendReady();`
+##### `ddp.sendReady(id);`
 
 Sends *ready* event, should be called inside `sub` event handler.
 
-##### `ddp.sendNosub();`
+##### `ddp.sendNosub(id);`
 
 Sends *nosub* event, should be called inside `sub` event handler.
+
+##### `ddp.sendEvent(msg, data);`
+
+Sends *generic* back to subscriber.
+
 
 ### References
 

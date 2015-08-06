@@ -38,6 +38,10 @@ function Context (req, sock, body) {
             send({msg: 'ready', subs: [id]});
         },
 
+        sendNosub: function (id) {
+            send({msg: 'nosub', subs: [id]});
+        },
+
         sendEvent: function (msg, data) {
             data.msg = msg;
             send(data);
