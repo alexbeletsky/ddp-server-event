@@ -21,5 +21,9 @@
   "bugs": {
     "url": "https://github.com/alexbeletsky/ddp-server-event/issues"
   },
-  "homepage": "https://github.com/alexbeletsky/ddp-server-event"
+  "homepage": "https://github.com/alexbeletsky/ddp-server-event",
+  "dependencies": {
+    "ejson": "^2.0.1",
+    "faye-websocket": "^0.10.0"
+  }
 }
