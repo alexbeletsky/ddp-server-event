@@ -14,11 +14,26 @@ function Context (req, sock, body) {
 
     var handleMessage = function (event) {
         var data = JSON.parse(event.data);
+        var message = data.msg;
+
+        // hanle special cases as `connected` and `pong`
+        if (message === 'connect') {
+            methods.sendEvent('connected', {session: session});
+        } else if (message === 'ping') {
+            methods.sendEvent('pong', {id: data.id});
+        // handle rpc calls
+        } else if (message === 'method'){
+            var prefixed = 'method:' + message;
+            this.emit.call(methods, prefixed, data.params);
+        // generic handler
+        } else {
+            this.emit.call(methods, message, data.params);
+        }
     };
 
     var handleClose = function () {
-        this.emit.call(methods, 'disconnected', session);
         ws = session = null;
+        this.emit.call(methods, 'disconnected');
     };
 
     return {
