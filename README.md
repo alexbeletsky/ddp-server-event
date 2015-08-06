@@ -77,7 +77,6 @@ Sends *nosub* event, should be called inside `sub` event handler.
 
 Sends *generic* back to subscriber.
 
-
 ### References
 
 * [DDP-Server](https://github.com/Tarang/DDP-Server)
