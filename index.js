@@ -8,8 +8,40 @@ function Context (req, sock, body) {
     var ws = new WebSocket(req, sock, body);
     var session = new Date().getTime().toString();
 
-    var methods = {
+    var send = function (data) {
+        ws.send(EJSON.stringify(data));
+    };
 
+    var methods = {
+        sendResult: function (id, result) {
+            send({msg: 'result', id: id, result: result});
+            send({msg: 'updated', id: id});
+        },
+
+        sendError: function (id, error) {
+            send({msg: 'error', id: id, error: error});
+        },
+
+        sendAdded: function (id, collection, fields) {
+            send({msg: 'added', id: id, collection: collection, fields: fields});
+        },
+
+        sendChanged: function (id, collection, fields, cleared) {
+            send({msg: 'changed', id: id, collection: collection, fields: fields, cleared: cleared});
+        },
+
+        sendDeleted: function (id, collection, fields, cleared) {
+            send({msg: 'removed', id: id, collection: collection, fields: fields, cleared: cleared});
+        },
+
+        sendReady: function (id) {
+            send({msg: 'ready', subs: [id]});
+        },
+
+        sendEvent: function (msg, data) {
+            data.msg = msg;
+            send(data);
+        }
     };
 
     var handleMessage = function (event) {
@@ -24,7 +56,7 @@ function Context (req, sock, body) {
         // handle rpc calls
         } else if (message === 'method'){
             var prefixed = 'method:' + message;
-            this.emit.call(methods, prefixed, data.params);
+            this.emit.call(methods, prefixed, data.id, data.params);
         // generic handler
         } else {
             this.emit.call(methods, message, data.params);

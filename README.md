@@ -35,7 +35,7 @@ ddp.on('method:test', function (id, params) {
     var x = params.x, y = params.y;
     var sum = x + y;
 
-    this.sendResult(sum);
+    this.sendResult(id, sum);
 });
 
 server.listen(3000);
