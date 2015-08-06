@@ -9,7 +9,8 @@ $ npm install --save ddp-server-events
 ```
 
 ```js
-var server = new Ddp({server: server});
+var server = http.createServer();
+var ddp = new Ddp({server: server});
 
 ddp.on('ready', function () {
     console.log('ddp server ready');
@@ -36,9 +37,13 @@ ddp.on('method:test', function (id, params) {
 
     this.sendResult(sum);
 });
+
+server.listen(3000);
 ```
 
 ## Methods
+
+Each event handler binded to `ddp` instance as `this`, such methods are available.
 
 ##### `ddp.sendResult();`
 
@@ -63,6 +68,14 @@ Sends `deleted` back to subscriber.
 ##### `ddp.sendEvent();`
 
 Sends *generic* back to subscriber.
+
+##### `ddp.sendReady();`
+
+Sends *ready* event, should be called inside `sub` event handler.
+
+##### `ddp.sendNosub();`
+
+Sends *nosub* event, should be called inside `sub` event handler.
 
 ### References
 
