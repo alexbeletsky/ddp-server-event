@@ -41,14 +41,26 @@ ddp.on('method:test', function (id, params) {
 
 ## Methods
 
-ddp.sendResult();
+##### `ddp.sendResult();`
 
-ddp.sendError();
+Sends the result back to subscriber.
 
-ddp.sendAdded();
+##### `ddp.sendError();`
 
-ddp.sendChanged();
+Sends the error back to subscriber.
 
-ddp.sendDeleted();
+##### `ddp.sendAdded();`
 
-ddp.sendEvent();
+Sends `added` back to subscriber.
+
+##### `ddp.sendChanged();`
+
+Sends `changed` back to subscriber.
+
+##### `ddp.sendDeleted();`
+
+Sends `deleted` back to subscriber.
+
+##### `ddp.sendEvent();`
+
+Sends *generic* back to subscriber.
