@@ -16,7 +16,7 @@
     "newcap": true,
     "noarg": true,
     "node" : true,
-    "browser": true,
+    "browser": false,
     "noempty": false,
     "nonew": true,
     "onevar": false,
