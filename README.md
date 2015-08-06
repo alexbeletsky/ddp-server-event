@@ -20,17 +20,16 @@ ddp.on('error', function (err) {
 });
 
 ddp.on('sub', function (id, name, params) {
-    // handle subscription to collection here...
-
+    // handle sub to collection here...
     this.sendReady();   // in case of error, this.sendNosub();
 });
 
 ddp.on('unsub', function (id, name, params) {
-    // handle unbsubcription here...
-
+    // handle unsub here...
     this.sendReady();
 });
 
+// all methods calls are prefixed with "method:"
 ddp.on('method:test', function (id, params) {
     var x = params.x, y = params.y;
     var sum = x + y;
