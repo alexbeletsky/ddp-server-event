@@ -63,3 +63,11 @@ Sends `deleted` back to subscriber.
 ##### `ddp.sendEvent();`
 
 Sends *generic* back to subscriber.
+
+### References
+
+* [DDP-Server](https://github.com/Tarang/DDP-Server)
+
+## License
+
+MIT alexander.beletsky@gmail.com
