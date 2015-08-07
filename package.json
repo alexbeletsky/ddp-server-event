@@ -28,7 +28,6 @@
   },
   "devDependencies": {
     "faucet": "0.0.1",
-    "tap-spec": "^4.0.2",
     "tape": "^4.0.3"
   }
 }
