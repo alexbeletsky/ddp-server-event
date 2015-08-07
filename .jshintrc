@@ -1,4 +1,12 @@
 {
+    "predef": [
+        "describe",
+        "it",
+        "after",
+        "afterEach",
+        "before",
+        "beforeEach"
+    ],
     "asi" : false,
     "bitwise" : true,
     "boss" : false,

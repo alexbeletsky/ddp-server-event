@@ -4,7 +4,7 @@ var events = require('events');
 var WebSocket = require('faye-websocket');
 var EJSON = require('ejson');
 
-function Context (req, sock, body) {
+function Request (req, sock, body) {
     var ws = new WebSocket(req, sock, body);
     var session = new Date().getTime().toString();
 
@@ -48,7 +48,28 @@ function Context (req, sock, body) {
         }
     };
 
-    var handleMessage = function (event) {
+    var request = {
+        id: session,
+
+        handle: function (ddp) {
+            ws.on('open', handleOpen.bind(ddp));
+            ws.on('message', handleMessage.bind(ddp));
+            ws.on('close', handleClose.bind(ddp));
+        },
+
+        close: function () {
+            if (ws) {
+                ws.close();
+                ws = session = null;
+            }
+        }
+    };
+
+    function handleOpen() {
+        this.emit('connected', request);
+    }
+
+    function handleMessage(event) {
         var data = JSON.parse(event.data);
         var message = data.msg;
 
@@ -65,19 +86,14 @@ function Context (req, sock, body) {
         } else {
             this.emit.call(methods, message, data.params);
         }
-    };
+    }
 
-    var handleClose = function () {
+    function handleClose () {
+        this.emit('disconnected', request);
         ws = session = null;
-        this.emit.call(methods, 'disconnected');
-    };
+    }
 
-    return {
-        handle: function (ddp) {
-            ws.on('message', handleMessage.bind(ddp));
-            ws.on('close', handleClose.bind(ddp));
-        }
-    };
+    return request;
 }
 
 function Ddp(options) {
@@ -85,20 +101,41 @@ function Ddp(options) {
         throw new Error('missing server instance');
     }
 
+    var ddp = this;
     var server = options.server;
+    var requests = [];
 
     events.EventEmitter.call(this);
 
-    var handleRequest = function (req, sock, body) {
-        var context = new Context(req, sock, body);
-        context.handle(this);
-    };
+    ddp.on('connected', function (request) {
+        requests.push(request);
+    });
+
+    ddp.on('disconnected', function (request) {
+        requests.splice(requests.indexOf(request), 1);
+    });
 
     server.on('upgrade', function (req, sock, body) {
         if (WebSocket.isWebSocket(req)) {
-            handleRequest(req, sock, body);
+            var request = new Request(req, sock, body);
+            request.handle(ddp);
         }
     });
+
+    ddp.listen = function () {
+        server.listen.apply(server, arguments);
+    };
+
+    ddp.close = function () {
+        // closing all active requests..
+        requests.forEach(function (r) {
+            r.close();
+        });
+
+        requests = [];
+
+        server.close.apply(server, arguments);
+    };
 }
 
 util.inherits(Ddp, events.EventEmitter);

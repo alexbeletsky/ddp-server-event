@@ -4,7 +4,7 @@
   "description": "The implementation of DDP server based on EventEmitter",
   "main": "source/index.js",
   "scripts": {
-    "test": "node test/index.js | node_modules/.bin/faucet"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -27,7 +27,10 @@
     "faye-websocket": "^0.10.0"
   },
   "devDependencies": {
+    "ddp.js": "alexbeletsky/ddp.js",
+    "expect.js": "^0.3.1",
     "faucet": "0.0.1",
+    "mocha": "^2.2.5",
     "tape": "^4.0.3"
   }
 }
