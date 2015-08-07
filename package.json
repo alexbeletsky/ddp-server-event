@@ -4,7 +4,7 @@
   "description": "The implementation of DDP server based on EventEmitter",
   "main": "source/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/index.js | node_modules/.bin/faucet"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,10 @@
   "dependencies": {
     "ejson": "^2.0.1",
     "faye-websocket": "^0.10.0"
+  },
+  "devDependencies": {
+    "faucet": "0.0.1",
+    "tap-spec": "^4.0.2",
+    "tape": "^4.0.3"
   }
 }
