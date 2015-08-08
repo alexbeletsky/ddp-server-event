@@ -114,4 +114,23 @@ describe('ddp server', function () {
         });
     });
 
+    describe('ready event', function () {
+        beforeEach(function () {
+            httpServer = createServer();
+            ddpServer = createDdp(httpServer);
+        });
+
+        afterEach(function (done) {
+            ddpServer.close(done);
+        });
+
+        it('should ready event emitted after start', function (done) {
+            ddpServer.on('ready', function () {
+                done();
+            });
+
+            ddpServer.listen(3000);
+        });
+    });
+
 });

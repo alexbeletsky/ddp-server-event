@@ -123,6 +123,7 @@ function Ddp(options) {
     });
 
     ddp.listen = function () {
+        ddp.emit('ready', ddp);
         server.listen.apply(server, arguments);
     };
 
@@ -134,8 +135,10 @@ function Ddp(options) {
 
         requests = [];
 
+        // close http server
         server.close.apply(server, arguments);
     };
+
 }
 
 util.inherits(Ddp, events.EventEmitter);
