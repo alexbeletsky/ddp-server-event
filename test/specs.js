@@ -133,4 +133,37 @@ describe('ddp server', function () {
         });
     });
 
+    describe('client calls method', function () {
+        beforeEach(function (done) {
+            httpServer = createServer();
+            ddpServer = createDdp(httpServer);
+            ddpServer.listen(3000, done);
+        });
+
+        beforeEach(function (done) {
+            ddpClient = createClient();
+            ddpClient.on('connected', done);
+        });
+
+        afterEach(function () {
+            ddpClient.close();
+        });
+
+        afterEach(function () {
+            ddpServer.close();
+        });
+
+        it('server should recieve call', function (done) {
+            ddpServer.on('method:test', function (id, params) {
+                expect(id).to.be.ok();
+                expect(params.x).to.equal(1);
+                expect(params.y).to.equal(2);
+
+                done();
+            });
+
+            ddpClient.method('test', {x: 1, y: 2});
+        });
+    });
+
 });

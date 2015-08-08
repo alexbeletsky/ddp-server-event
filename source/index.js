@@ -80,8 +80,8 @@ function Request (req, sock, body) {
             methods.sendEvent('pong', {id: data.id});
         // handle rpc calls
         } else if (message === 'method'){
-            var prefixed = 'method:' + message;
-            this.emit.call(methods, prefixed, data.id, data.params);
+            var prefixed = 'method:' + data.method;
+            this.emit(prefixed, data.id, data.params);
         // generic handler
         } else {
             this.emit.call(methods, message, data.params);
