@@ -30,8 +30,6 @@
   "devDependencies": {
     "ddp.js": "alexbeletsky/ddp.js",
     "expect.js": "^0.3.1",
-    "faucet": "0.0.1",
-    "mocha": "^2.2.5",
-    "tape": "^4.0.3"
+    "mocha": "^2.2.5"
   }
 }
