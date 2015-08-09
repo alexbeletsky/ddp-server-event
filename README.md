@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/alexbeletsky/ddp-server-event.svg?branch=master)](https://travis-ci.org/alexbeletsky/ddp-server-event)
+[![Coverage Status](https://img.shields.io/coveralls/alexbeletsky/ddp-server-event.svg)](https://coveralls.io/r/alexbeletsky/ddp-server-event?branch=master)
+[![Dependency Status](https://david-dm.org/alexbeletsky/ddp-server-event.svg)](https://david-dm.org/alexbeletsky/ddp-server-event)
+[![devDependency Status](https://david-dm.org/alexbeletsky/ddp-server-event/dev-status.svg)](https://david-dm.org/alexbeletsky/ddp-server-event#info=devDependencies)
+
 # DDP Server based on Events
 
 The implementation of [DDP](https://www.meteor.com/ddp) server based on [EventEmitter](https://nodejs.org/api/events.html#events_class_events_eventemitter).
