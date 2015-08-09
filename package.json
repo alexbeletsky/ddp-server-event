@@ -1,6 +1,6 @@
 {
   "name": "ddp-server-event",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The implementation of DDP server based on EventEmitter",
   "main": "source/index.js",
   "scripts": {
