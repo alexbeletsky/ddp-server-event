@@ -243,4 +243,20 @@ describe('ddp server', function () {
         });
     });
 
+    describe('collection events', function () {
+
+        describe('added', function () {
+
+        });
+
+        describe('changed', function () {
+
+        });
+
+        describe('deleted', function () {
+
+        });
+        
+    });
+
 });
