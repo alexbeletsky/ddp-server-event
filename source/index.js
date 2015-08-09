@@ -69,6 +69,9 @@ function Request (req, sock, body) {
         this.emit('connected', request);
     }
 
+    // binding EventEmitter .emit() method
+    // http://stackoverflow.com/a/8016478/386751
+
     function handleMessage(event) {
         var data = JSON.parse(event.data);
         var message = data.msg;
@@ -81,7 +84,8 @@ function Request (req, sock, body) {
         // handle rpc calls
         } else if (message === 'method'){
             var prefixed = 'method:' + data.method;
-            this.emit(prefixed, data.id, data.params);
+            methods._events = this._events;
+            this.emit.call(methods, prefixed, data.id, data.params);
         // generic handler
         } else {
             this.emit.call(methods, message, data.params);

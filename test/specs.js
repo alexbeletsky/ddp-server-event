@@ -153,11 +153,35 @@ describe('ddp server', function () {
             ddpServer.close();
         });
 
-        it('server should recieve call', function (done) {
+        it('should server should recieve call', function (done) {
             ddpServer.on('method:test', function (id, params) {
                 expect(id).to.be.ok();
                 expect(params.x).to.equal(1);
                 expect(params.y).to.equal(2);
+
+                done();
+            });
+
+            ddpClient.method('test', {x: 1, y: 2});
+        });
+
+        it('should server reply the call', function (done) {
+            var fromId;
+
+            ddpServer.on('method:test', function (id, params) {
+                var x = params.x, y = params.y;
+                var sum = x + y;
+
+                fromId = id;
+
+                this.sendResult(id, sum);
+            });
+
+            ddpClient.on('result', function (message) {
+                expect(message).to.be.ok();
+                expect(message.msg).to.equal('result');
+                expect(message.id).to.equal(fromId);
+                expect(message.result).to.equal(3);
 
                 done();
             });
