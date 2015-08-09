@@ -190,4 +190,57 @@ describe('ddp server', function () {
         });
     });
 
+    describe('client calls sub', function () {
+        beforeEach(function (done) {
+            httpServer = createServer();
+            ddpServer = createDdp(httpServer);
+            ddpServer.listen(3000, done);
+        });
+
+        beforeEach(function (done) {
+            ddpClient = createClient();
+            ddpClient.on('connected', done);
+        });
+
+        afterEach(function () {
+            ddpClient.close();
+        });
+
+        afterEach(function () {
+            ddpServer.close();
+        });
+
+        it('ready responded', function (done) {
+            ddpServer.on('sub', function (id, name, params) {
+                expect(name).to.equal('names');
+                expect(params.param).to.equal(1);
+
+                this.sendReady(id);
+            });
+
+            ddpClient.on('ready', function(a) {
+                done();
+            });
+
+            ddpClient.sub('names', {param: 1});
+        });
+
+        it('nosub responded', function (done) {
+            var error = 'collection not found';
+
+            ddpServer.on('sub', function (id, name, params) {
+                expect(name).to.equal('names');
+                expect(params.param).to.equal(1);
+
+                this.sendNosub(id, error);
+            });
+
+            ddpClient.on('nosub', function(id, e) {
+                done();
+            });
+
+            ddpClient.sub('names', {param: 1});
+        });
+    });
+
 });

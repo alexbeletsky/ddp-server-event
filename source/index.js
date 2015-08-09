@@ -38,8 +38,8 @@ function Request (req, sock, body) {
             send({msg: 'ready', subs: [id]});
         },
 
-        sendNosub: function (id) {
-            send({msg: 'nosub', subs: [id]});
+        sendNosub: function (id, error) {
+            send({msg: 'nosub', id: id, error: error});
         },
 
         sendEvent: function (msg, data) {
@@ -69,12 +69,13 @@ function Request (req, sock, body) {
         this.emit('connected', request);
     }
 
-    // binding EventEmitter .emit() method
-    // http://stackoverflow.com/a/8016478/386751
-
     function handleMessage(event) {
         var data = JSON.parse(event.data);
         var message = data.msg;
+
+        // binding EventEmitter .emit() method
+        // http://stackoverflow.com/a/8016478/386751
+        methods._events = this._events;
 
         // hanle special cases as `connected` and `pong`
         if (message === 'connect') {
@@ -82,13 +83,15 @@ function Request (req, sock, body) {
         } else if (message === 'ping') {
             methods.sendEvent('pong', {id: data.id});
         // handle rpc calls
-        } else if (message === 'method'){
+        } else if (message === 'method') {
             var prefixed = 'method:' + data.method;
-            methods._events = this._events;
             this.emit.call(methods, prefixed, data.id, data.params);
+        // sub and unsub
+        } else if (message === 'sub') {
+            this.emit.call(methods, message, data.id, data.name, data.params);
         // generic handler
         } else {
-            this.emit.call(methods, message, data.params);
+            this.emit.call(methods, message, data.id, data.params);
         }
     }
 

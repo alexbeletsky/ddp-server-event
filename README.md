@@ -16,10 +16,6 @@ ddp.on('ready', function () {
     console.log('ddp server ready');
 });
 
-ddp.on('error', function (err) {
-    console.error('ddp server failed', err);
-});
-
 ddp.on('sub', function (id, name, params) {
     // handle sub to collection here...
     this.sendReady();   // in case of error, this.sendNosub();
