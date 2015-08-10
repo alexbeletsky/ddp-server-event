@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/alexbeletsky/ddp-server-event.svg?branch=master)](https://travis-ci.org/alexbeletsky/ddp-server-event)
-[![Coverage Status](https://img.shields.io/coveralls/alexbeletsky/ddp-server-event.svg)](https://coveralls.io/r/alexbeletsky/ddp-server-event?branch=master)
+[![Coverage Status](https://coveralls.io/repos/alexbeletsky/ddp-server-event/badge.svg?branch=master&service=github)](https://coveralls.io/github/alexbeletsky/ddp-server-event?branch=master)
 [![Dependency Status](https://david-dm.org/alexbeletsky/ddp-server-event.svg)](https://david-dm.org/alexbeletsky/ddp-server-event)
 [![devDependency Status](https://david-dm.org/alexbeletsky/ddp-server-event/dev-status.svg)](https://david-dm.org/alexbeletsky/ddp-server-event#info=devDependencies)
 
