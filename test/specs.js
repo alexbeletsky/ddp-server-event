@@ -26,6 +26,14 @@ var createClient = function () {
 describe('ddp server', function () {
     var httpServer, ddpServer, ddpClient;
 
+    describe('missing options', function () {
+        it('should thrown exception', function () {
+            expect(function () {
+                createDdp(null);
+            }).to.throwError();
+        });
+    });
+
     describe('constuction', function () {
         beforeEach(function () {
             httpServer = createServer();
@@ -110,6 +118,34 @@ describe('ddp server', function () {
                 ddpServer.on('disconnected', function (request) {
                     done();
                 });
+            });
+        });
+    });
+
+    describe('client pings', function () {
+        beforeEach(function () {
+            httpServer = createServer();
+            ddpServer = createDdp(httpServer);
+
+            ddpServer.listen(3000);
+        });
+
+        beforeEach(function () {
+            ddpClient = createClient();
+        });
+
+        afterEach(function (done) {
+            ddpServer.close(done);
+        });
+
+        it('client should recieve pong', function (done) {
+            ddpClient.on('connected', function () {
+                // server responds with pong
+                ddpClient.on('pong', function () {
+                    done();
+                });
+
+                ddpClient.ping();
             });
         });
     });
@@ -256,7 +292,7 @@ describe('ddp server', function () {
         describe('deleted', function () {
 
         });
-        
+
     });
 
 });
