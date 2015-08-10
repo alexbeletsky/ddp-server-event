@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/alexbeletsky/ddp-server-event.svg?branch=master)](https://travis-ci.org/alexbeletsky/ddp-server-event)
 [![Coverage Status](https://coveralls.io/repos/alexbeletsky/ddp-server-event/badge.svg?branch=master&service=github)](https://coveralls.io/github/alexbeletsky/ddp-server-event?branch=master)
+[![Code Climate](https://codeclimate.com/github/alexbeletsky/ddp-server-event/badges/gpa.svg)](https://codeclimate.com/github/alexbeletsky/ddp-server-event)
 [![Dependency Status](https://david-dm.org/alexbeletsky/ddp-server-event.svg)](https://david-dm.org/alexbeletsky/ddp-server-event)
 [![devDependency Status](https://david-dm.org/alexbeletsky/ddp-server-event/dev-status.svg)](https://david-dm.org/alexbeletsky/ddp-server-event#info=devDependencies)
 

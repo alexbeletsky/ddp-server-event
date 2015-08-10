@@ -7,7 +7,8 @@
     "test": "./node_modules/mocha/bin/mocha",
     "test-watch": "./node_modules/mocha/bin/mocha --watch",
     "coverage": "./node_modules/.bin/istanbul cover _mocha --",
-    "coveralls": "npm run coverage && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "codeclimate": "cat ./coverage/lcov.info | ./node_modules/.bin/codeclimate-test-reporter"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "faye-websocket": "^0.10.0"
   },
   "devDependencies": {
+    "codeclimate-test-reporter": "^0.1.0",
     "coveralls": "^2.11.3",
     "expect.js": "^0.3.1",
     "istanbul": "^0.3.17",
