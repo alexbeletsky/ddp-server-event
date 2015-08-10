@@ -277,6 +277,24 @@ describe('ddp server', function () {
 
             ddpClient.sub('names', {param: 1});
         });
+
+        it('error responded', function (done) {
+            var error = 'collection not found';
+
+            ddpServer.on('sub', function (id, name, params) {
+                expect(name).to.equal('names');
+                expect(params.param).to.equal(1);
+
+                this.sendError(id, error);
+            });
+
+            ddpClient.on('error', function(data) {
+                expect(data.error).to.equal(error);
+                done();
+            });
+
+            ddpClient.sub('names', {param: 1});
+        });
     });
 
     describe('client calls unsub', function () {
