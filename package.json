@@ -1,11 +1,13 @@
 {
   "name": "ddp-server-event",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "description": "The implementation of DDP server based on EventEmitter",
   "main": "source/index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha",
-    "test-watch": "./node_modules/mocha/bin/mocha --watch"
+    "test-watch": "./node_modules/mocha/bin/mocha --watch",
+    "coverage": "./node_modules/.bin/istanbul cover _mocha --report lcovonly --",
+    "coveralls": "npm run coverage && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "repository": {
     "type": "git",
@@ -24,10 +26,10 @@
   },
   "homepage": "https://github.com/alexbeletsky/ddp-server-event",
   "dependencies": {
-    "ejson": "^2.0.1",
     "faye-websocket": "^0.10.0"
   },
   "devDependencies": {
+    "coveralls": "^2.11.3",
     "ddp.js": "alexbeletsky/ddp.js",
     "expect.js": "^0.3.1",
     "mocha": "^2.2.5"
