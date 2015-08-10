@@ -2,14 +2,14 @@ var util = require('util');
 var events = require('events');
 
 var WebSocket = require('faye-websocket');
-var EJSON = require('ejson');
+// var EJSON = require('ejson');
 
 function Request (req, sock, body) {
     var ws = new WebSocket(req, sock, body);
     var session = new Date().getTime().toString();
 
     var send = function (data) {
-        ws.send(EJSON.stringify(data));
+        ws.send(JSON.stringify(data));
     };
 
     var methods = {
