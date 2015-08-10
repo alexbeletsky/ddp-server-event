@@ -279,6 +279,56 @@ describe('ddp server', function () {
         });
     });
 
+    describe('client calls unsub', function () {
+        beforeEach(function (done) {
+            httpServer = createServer();
+            ddpServer = createDdp(httpServer);
+            ddpServer.listen(3000, done);
+        });
+
+        beforeEach(function (done) {
+            ddpClient = createClient();
+            ddpClient.on('connected', done);
+        });
+
+        afterEach(function () {
+            ddpClient.close();
+        });
+
+        afterEach(function () {
+            ddpServer.close();
+        });
+
+        it('ready responded', function (done) {
+            var fromId, called = 0;
+
+            ddpServer.on('sub', function (id, name, params) {
+                expect(name).to.equal('names');
+
+                fromId = id;
+
+                this.sendReady(id);
+
+                ddpClient.unsub(fromId);
+            });
+
+            ddpServer.on('unsub', function (id) {
+                expect(id).to.equal(fromId);
+
+                this.sendReady(id);
+            });
+
+            ddpClient.on('ready', function (a) {
+                // second read should be from unsub..
+                if (++called === 2) {
+                    done();
+                }
+            });
+
+            ddpClient.sub('names');
+        });
+    });
+
     describe('collection events', function () {
 
         describe('added', function () {

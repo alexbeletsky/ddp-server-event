@@ -87,7 +87,7 @@ function Request (req, sock, body) {
             var prefixed = 'method:' + data.method;
             this.emit.call(methods, prefixed, data.id, data.params);
         // sub and unsub
-        } else if (message === 'sub') {
+        } else if (message === 'sub' || message === 'unsub') {
             this.emit.call(methods, message, data.id, data.name, data.params);
         // generic handler
         } else {
