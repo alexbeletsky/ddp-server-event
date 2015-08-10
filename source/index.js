@@ -2,14 +2,14 @@ var util = require('util');
 var events = require('events');
 
 var WebSocket = require('faye-websocket');
-// var EJSON = require('ejson');
+var EJSON = require('ejson');
 
 function Request (req, sock, body) {
     var ws = new WebSocket(req, sock, body);
     var session = new Date().getTime().toString();
 
     var send = function (data) {
-        ws.send(JSON.stringify(data));
+        ws.send(EJSON.stringify(data));
     };
 
     var methods = {
@@ -89,11 +89,6 @@ function Request (req, sock, body) {
         // sub and unsub
         } else if (message === 'sub' || message === 'unsub') {
             this.emit.call(methods, message, data.id, data.name, data.params);
-        // error handler
-        } else if (message === 'error') {
-            console.log(data);
-            
-            this.emit.call(methods, message, data.id, data.error);
         // generic handler
         } else {
             this.emit.call(methods, message, data.id, data.params);

@@ -27,6 +27,7 @@
   "homepage": "https://github.com/alexbeletsky/ddp-server-event",
   "dependencies": {
     "ddp.js": "alexbeletsky/ddp.js",
+    "ejson": "^2.1.1",
     "faye-websocket": "^0.10.0"
   },
   "devDependencies": {
