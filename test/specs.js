@@ -350,14 +350,68 @@ describe('ddp server', function () {
     describe('collection events', function () {
 
         describe('added', function () {
+            beforeEach(function (done) {
+                httpServer = createServer();
+                ddpServer = createDdp(httpServer);
+                ddpServer.listen(3000, done);
+            });
+
+            beforeEach(function (done) {
+                ddpClient = createClient();
+                ddpClient.on('connected', done);
+            });
+
+            afterEach(function () {
+                ddpClient.close();
+            });
+
+            afterEach(function () {
+                ddpServer.close();
+            });
 
         });
 
         describe('changed', function () {
+            beforeEach(function (done) {
+                httpServer = createServer();
+                ddpServer = createDdp(httpServer);
+                ddpServer.listen(3000, done);
+            });
+
+            beforeEach(function (done) {
+                ddpClient = createClient();
+                ddpClient.on('connected', done);
+            });
+
+            afterEach(function () {
+                ddpClient.close();
+            });
+
+            afterEach(function () {
+                ddpServer.close();
+            });
 
         });
 
         describe('deleted', function () {
+            beforeEach(function (done) {
+                httpServer = createServer();
+                ddpServer = createDdp(httpServer);
+                ddpServer.listen(3000, done);
+            });
+
+            beforeEach(function (done) {
+                ddpClient = createClient();
+                ddpClient.on('connected', done);
+            });
+
+            afterEach(function () {
+                ddpClient.close();
+            });
+
+            afterEach(function () {
+                ddpServer.close();
+            });
 
         });
 
