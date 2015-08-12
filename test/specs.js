@@ -369,6 +369,9 @@ describe('ddp server', function () {
                 ddpServer.close();
             });
 
+            it('should recieve added event', function () {
+                expect().fail();
+            });
         });
 
         describe('changed', function () {
@@ -391,6 +394,9 @@ describe('ddp server', function () {
                 ddpServer.close();
             });
 
+            it('should recieve changed event', function () {
+                expect().fail();
+            });
         });
 
         describe('deleted', function () {
@@ -413,6 +419,9 @@ describe('ddp server', function () {
                 ddpServer.close();
             });
 
+            it('should recieve deleted event', function () {
+                expect().fail();
+            });
         });
 
     });
