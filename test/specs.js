@@ -369,8 +369,28 @@ describe('ddp server', function () {
                 ddpServer.close();
             });
 
-            it('should recieve added event', function () {
-                expect().fail();
+            it('should recieve added event', function (done) {
+                ddpServer.on('sub', function (id, name, param) {
+                    var ddp = this;
+
+                    expect(param).to.eql({param: 'param'});
+
+                    ddp.sendReady(id);
+
+                    setTimeout(function () {
+                        ddp.sendAdded(id, name, {field: 1});
+                    }, 50);
+                });
+
+                ddpClient.on('added', function (message) {
+                    expect(message).to.be.ok();
+                    expect(message.msg).to.equal('added');
+                    expect(message.collection).to.equal('collection');
+
+                    done();
+                });
+
+                ddpClient.sub('collection', {param: 'param'});
             });
         });
 
@@ -394,12 +414,32 @@ describe('ddp server', function () {
                 ddpServer.close();
             });
 
-            it('should recieve changed event', function () {
-                expect().fail();
+            it('should recieve changed event', function (done) {
+                ddpServer.on('sub', function (id, name, param) {
+                    var ddp = this;
+
+                    expect(param).to.eql({param: 'param'});
+
+                    ddp.sendReady(id);
+
+                    setTimeout(function () {
+                        ddp.sendChanged(id, name, {field: 1});
+                    }, 50);
+                });
+
+                ddpClient.on('changed', function (message) {
+                    expect(message).to.be.ok();
+                    expect(message.msg).to.equal('changed');
+                    expect(message.collection).to.equal('collection');
+
+                    done();
+                });
+
+                ddpClient.sub('collection', {param: 'param'});
             });
         });
 
-        describe('deleted', function () {
+        describe('removed', function () {
             beforeEach(function (done) {
                 httpServer = createServer();
                 ddpServer = createDdp(httpServer);
@@ -419,8 +459,28 @@ describe('ddp server', function () {
                 ddpServer.close();
             });
 
-            it('should recieve deleted event', function () {
-                expect().fail();
+            it('should recieve deleted event', function (done) {
+                ddpServer.on('sub', function (id, name, param) {
+                    var ddp = this;
+
+                    expect(param).to.eql({param: 'param'});
+
+                    ddp.sendReady(id);
+
+                    setTimeout(function () {
+                        ddp.sendRemoved(id, name, {field: 1});
+                    }, 50);
+                });
+
+                ddpClient.on('removed', function (message) {
+                    expect(message).to.be.ok();
+                    expect(message.msg).to.equal('removed');
+                    expect(message.collection).to.equal('collection');
+
+                    done();
+                });
+
+                ddpClient.sub('collection', {param: 'param'});
             });
         });
 

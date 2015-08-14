@@ -30,7 +30,7 @@ function Request (req, sock, body) {
             send({msg: 'changed', id: id, collection: collection, fields: fields, cleared: cleared});
         },
 
-        sendDeleted: function (id, collection, fields, cleared) {
+        sendRemoved: function (id, collection, fields, cleared) {
             send({msg: 'removed', id: id, collection: collection, fields: fields, cleared: cleared});
         },
 
