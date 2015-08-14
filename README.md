@@ -11,7 +11,7 @@ The implementation of [DDP](https://www.meteor.com/ddp) server based on [EventEm
 ## Usage
 
 ```bash
-$ npm install --save ddp-server-events
+$ npm install --save ddp-server-event
 ```
 
 ```js
