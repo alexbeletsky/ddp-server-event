@@ -57,15 +57,15 @@ Sends the error back to subscriber.
 
 ##### `ddp.sendAdded(id, collection, fields);`
 
-Sends `added` back to subscriber.
+Sends *added* back to subscriber.
 
 ##### `ddp.sendChanged(id, collection, fields, cleared);`
 
-Sends `changed` back to subscriber.
+Sends *changed* back to subscriber.
 
-##### `ddp.sendDeleted(id, collection, fields, cleared);`
+##### `ddp.sendRemoved(id, collection, fields, cleared);`
 
-Sends `deleted` back to subscriber.
+Sends *removed* back to subscriber.
 
 ##### `ddp.sendReady(id);`
 
