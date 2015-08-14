@@ -89,9 +89,6 @@ function Request (req, sock, body) {
         // sub and unsub
         } else if (message === 'sub' || message === 'unsub') {
             this.emit.call(methods, message, data.id, data.name, data.params);
-        // generic handler
-        } else {
-            this.emit.call(methods, message, data.id, data.params);
         }
     }
 
