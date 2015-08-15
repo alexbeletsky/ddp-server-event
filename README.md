@@ -83,6 +83,10 @@ Sends *generic* back to subscriber.
 
 * [DDP-Server](https://github.com/Tarang/DDP-Server)
 
+### Usage
+
+* [alexbeletsky/sparkling](https://github.com/alexbeletsky/sparkling) - Reactive API for Express.js
+
 ## License
 
 MIT alexander.beletsky@gmail.com
